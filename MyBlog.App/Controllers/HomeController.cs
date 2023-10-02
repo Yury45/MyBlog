@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyBlog.App.Models;
+using MyBlog.App.ViewModels;
 using MyBlog.Data.Models.Users;
 using MyBlog.Data.Repositories.Interfaces;
 using System.Diagnostics;

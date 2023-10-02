@@ -3,8 +3,12 @@ using MyBlog.Data.Repositories;
 
 namespace MyBlog.App.Extentions
 {
+    /// <summary>
+    /// Методы расширения сервисов
+    /// </summary>
     public static class ServiceExtentions
     {
+        #region Реализация паттерна UnitOfWork
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -20,6 +24,6 @@ namespace MyBlog.App.Extentions
 
             return services;
         }
-
+        #endregion
     }
 }
