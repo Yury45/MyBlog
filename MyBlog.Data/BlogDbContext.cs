@@ -1,13 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyBlog.Data.Models.Articles;
 using MyBlog.Data.Models.Comments;
 using MyBlog.Data.Models.Roles;
 using MyBlog.Data.Models.Tags;
 using MyBlog.Data.Models.Users;
+using System.Reflection.Emit;
 
 namespace MyBlog.Data
 {
-    public class BlogDbContext : DbContext
+    public class BlogDbContext : IdentityDbContext<User,Role,int>
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Article> Articles { get; set; }
@@ -22,12 +25,16 @@ namespace MyBlog.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+            builder.Ignore<IdentityUserToken<int>>();
+            builder.Ignore<IdentityUserLogin<int>>();
+
 
             builder.Entity<Article>().ToTable("articles");
             builder.Entity<Comment>().ToTable("comments");
-            builder.Entity<Role>().ToTable("roles");
+            builder.Entity<Role>().ToTable("roles").HasKey(x => x.Id);
             builder.Entity<Tag>().ToTable("tags");
-            builder.Entity<User>().ToTable("users");
+            builder.Entity<User>().ToTable("users").HasKey(x => x.Id);
 
             builder.Entity<Comment>()
             .HasOne(a => a.User)

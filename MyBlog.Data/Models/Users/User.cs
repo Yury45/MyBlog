@@ -13,7 +13,7 @@ namespace MyBlog.Data.Models.Users
     /// <summary>
     /// Сущность пользователя
     /// </summary>
-    public class User : IdentityUser<Guid>
+    public class User : IdentityUser<int>
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }

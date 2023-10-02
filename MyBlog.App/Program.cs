@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MyBlog.Data;
 using MyBlog.Data.Models.Articles;
 using MyBlog.Data.Models.Comments;
+using MyBlog.Data.Models.Roles;
 using MyBlog.Data.Models.Tags;
 using MyBlog.Data.Models.Users;
 using MyBlog.Data.Repositories;
@@ -24,6 +25,14 @@ namespace MyBlog.App
             builder.Services.AddSingleton<IRepository<Tag>, TagRepository>();
             builder.Services.AddSingleton<IRepository<User>, UserRepository>();
 
+            builder.Services.AddIdentity<User, Role>(cfg =>
+            {
+                cfg.Password.RequiredLength = 8;
+                cfg.Password.RequireNonAlphanumeric = false;
+                cfg.Password.RequireUppercase = false;
+                cfg.Password.RequireLowercase = false;
+                cfg.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<BlogDbContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
