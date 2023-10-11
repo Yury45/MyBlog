@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MyBlog.BLL.ViewModels.User.Request;
+using MyBlog.BLL.ViewModels.Users.Request;
 using MyBlog.Data.Models.Users;
 
 namespace MyBlog.App.Controllers
