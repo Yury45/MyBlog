@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MyBlog.App.ViewModels.User
+namespace MyBlog.BLL.ViewModels.Users.Request
 {
     /// <summary>
-    /// Модель представления страницы авторизации
+    /// Модель авторизации пользователя
     /// </summary>
     public class LoginUserViewModel
-    {   
+    {
         [Required(ErrorMessage = "Поле обязательно для заполнения!")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email", Prompt = "Введите Email")]

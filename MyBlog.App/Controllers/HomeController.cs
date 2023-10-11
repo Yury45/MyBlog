@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyBlog.App.ViewModels;
+using MyBlog.BLL.ViewModels;
 using MyBlog.Data.Models.Users;
 using MyBlog.Data.Repositories.Interfaces;
 using System.Diagnostics;
+
 
 namespace MyBlog.App.Controllers
 {

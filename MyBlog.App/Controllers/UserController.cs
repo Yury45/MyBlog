@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MyBlog.App.ViewModels.User;
+using MyBlog.BLL.ViewModels.User.Request;
 using MyBlog.Data.Models.Users;
 
-namespace MyBlog.App.Controllers.UserControllers
+namespace MyBlog.App.Controllers
 {    /// <summary>
      /// Контроллер регистрации пользователя
      /// </summary>
-    public class RegisterUserController : Controller
+    public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public RegisterUserController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -22,7 +22,7 @@ namespace MyBlog.App.Controllers.UserControllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View("Home/Register");
+            return View("Register");
         }
 
         [Route("RegisterPart2")]

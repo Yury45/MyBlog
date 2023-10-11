@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MyBlog.App.ViewModels.User
+namespace MyBlog.BLL.ViewModels.Users.Request
 {
     /// <summary>
-    /// Модель представления страницы регистрации пользователя
+    /// Модель регистрации пользователя
     /// </summary>
     public class RegisterUserViewModel
     {
@@ -15,6 +15,10 @@ namespace MyBlog.App.ViewModels.User
         [Required]
         [Display(Name = "Фамилия")]
         public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Отчество")]
+        public string SecondName { get; set; }
 
         [Required]
         [Display(Name = "Email")]

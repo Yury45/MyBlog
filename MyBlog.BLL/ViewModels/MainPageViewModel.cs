@@ -1,4 +1,4 @@
-﻿using MyBlog.App.ViewModels.User;
+﻿using MyBlog.BLL.ViewModels.Users.Request;
 
 namespace MyBlog.App.ViewModels
 {

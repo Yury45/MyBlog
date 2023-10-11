@@ -12,10 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyBlog.Data\MyBlog.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
+	<ProjectReference Include="..\MyBlog.BLL\MyBlog.BLL.csproj" />
   </ItemGroup>
 
 </Project>
