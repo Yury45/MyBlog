@@ -1,18 +1,12 @@
 ﻿using MyBlog.BLL.ViewModels.Tags.Response;
-using MyBlog.Data.Models.Tags;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MyBlog.BLL.ViewModels.Articles.Request
+namespace MyBlog.BLL.ViewModels.Comments.Request
 {
     /// <summary>
-    /// Модель обновления статьи
+    /// Модель обновления комментария
     /// </summary>
-    public class EditArticleViewModel 
+    public class EditCommentViewModel 
     {
         public int Id { get; set; }
 

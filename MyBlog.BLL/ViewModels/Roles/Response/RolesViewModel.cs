@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBlog.Data.Models.Roles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,6 @@ namespace MyBlog.BLL.ViewModels.Roles.Response
     /// </summary>
     public class RolesViewModel
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public string Description { get; set; }
+        public List<Role> Roles { get; set; } = new List<Role>();
     }
 }

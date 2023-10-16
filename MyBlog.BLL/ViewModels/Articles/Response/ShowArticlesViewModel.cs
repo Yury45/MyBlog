@@ -14,7 +14,7 @@ namespace MyBlog.BLL.ViewModels.Articles.Response
     /// <summary>
     /// Модель списка статей
     /// </summary>
-    public class ArticlesViewModel
+    public class ShowArticlesViewModel
     {
         public List<Article> Article { get; set; } = new List<Article>();
     }

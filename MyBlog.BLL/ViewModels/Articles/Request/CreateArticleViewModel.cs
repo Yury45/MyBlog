@@ -1,4 +1,4 @@
-﻿using MyBlog.BLL.ViewModels.Articles.Interfaces;
+﻿using MyBlog.BLL.ViewModels.Tags.Response;
 using MyBlog.Data.Models.Tags;
 using System;
 using System.Collections.Generic;
@@ -12,19 +12,23 @@ namespace MyBlog.BLL.ViewModels.Articles.Request
     /// <summary>
     /// Модель создания статьи
     /// </summary>
-    public class CreateArticleViewModel : ICreateArticle
+    public class CreateArticleViewModel
     {
-        public int UserId { get ; set ; }
-        public List<Tag>? Tags { get; set; }
+        public int Id { get; set; }
+        public string? AuthorId { get; set; }
 
-        public string? ArticleTags { get; set; }
+        [DataType(DataType.Text)]
+        [Display(Name = "Теги", Prompt = "Теги")]
+        public List<TagViewModel>? Tags { get; set; }
 
-        [Required(ErrorMessage = "Укажите название статьи!")]
-        [Display(Name = "Заголовок")]
-        public string Title { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Поле обязательно для заполнения")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Заголовок", Prompt = "Заголовок")]
+        public string? Title { get; set; }
 
-        [Required(ErrorMessage = "Укажите тело статьи!")]
-        [Display(Name = "Содержание")]
-        public string Content { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Поле обязательно для заполнения")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Содержание", Prompt = "Содержание")]
+        public string? Content { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MyBlog.BLL.ViewModels.Users.Request;
 using MyBlog.Data.Models.Roles;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyBlog.BLL.ViewModels.Users.Request
 {
@@ -8,14 +9,31 @@ namespace MyBlog.BLL.ViewModels.Users.Request
     /// </summary>
     public class CreateUserViewModel : RegisterUserViewModel
     {
-        public List<string>? Roles { get; set; } = new List<string> { "User" };
-        public List<string>? AllRoles { get; set; }
+        [Required(ErrorMessage = "Поле Имя обязательно для заполнения")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Имя", Prompt = "Введите имя")]
+        public string? FirstName { get; set; }
 
-        public CreateUserViewModel(List<Role> roles)
-        {
-            AllRoles = roles.Select(r => r.Name!).ToList();
-        }
+        [Required(ErrorMessage = "Поле Фамилия обязательно для заполнения")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Фамилия", Prompt = "Введите фамилию")]
+        public string? LastName { get; set; }
 
-        public CreateUserViewModel() { }
+        [Required(ErrorMessage = "Поле Никнейм обязательно для заполнения")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Никнейм", Prompt = "Введите никнейм")]
+        public string? UserName { get; set; }
+
+        [Required(ErrorMessage = "Поле Почта обязательно для заполнения")]
+        [EmailAddress]
+        [Display(Name = "Почта")]
+        public string? Email { get; set; }
+
+        [Required(ErrorMessage = "Поле Пароль обязательно для заполнения")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Пароль")]
+        public string? Password { get; set; }
+
+        public int Id { get; set; }
     }
 }

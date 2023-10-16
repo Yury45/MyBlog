@@ -15,8 +15,4 @@
     <ProjectReference Include="..\MyBlog.Data\MyBlog.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\Roles\Interfaces\" />
-  </ItemGroup>
-
 </Project>

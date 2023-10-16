@@ -16,7 +16,5 @@ namespace MyBlog.BLL.ViewModels.Users.Request
         [DataType(DataType.Password)]
         [Display(Name = "Пароль", Prompt = "Введите Password")]
         public string Password { get; set; }
-
-        public string? ReturnUrl { get; set; }
     }
 }

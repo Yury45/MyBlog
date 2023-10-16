@@ -1,12 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MyBlog.BLL.ViewModels.Tags.Request;
+using MyBlog.Data.Models.Tags;
 
 namespace MyBlog.BLL.Services.Interfaces
 {
-    internal interface ITagService
+    public interface ITagService
     {
+        /// <summary>
+        /// Метода создания тега
+        /// </summary>
+        Task<Guid> CreateTag(CreateTagViewModel model);
+
+        /// <summary>
+        /// Метод получения списка всех тегов
+        /// </summary>
+        Task<List<Tag>> GetAllTagsAsync();
+
+        /// <summary>
+        /// Метод получения тега по идентификатору
+        /// </summary>
+        Task<Tag> GetTagByIdAsync(int id);
+
+        /// <summary>
+        /// Метод обновления тега
+        /// </summary>
+        Task UpdateTagAsync(EditTagViewModel model, int id);
+
+        /// <summary>
+        /// Метод обновления тега
+        /// </summary>
+        Task<EditTagViewModel> UpdateTagAsync(int id);
+
+        /// <summary>
+        /// Метод удаления тега
+        /// </summary>
+        Task DeleteTagAsync(int id);
+
     }
 }

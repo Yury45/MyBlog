@@ -1,5 +1,4 @@
-﻿using MyBlog.BLL.ViewModels.Tags.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,7 +10,7 @@ namespace MyBlog.BLL.ViewModels.Tags.Request
     /// <summary>
     /// Модель обновления тега
     /// </summary>
-    public class EditTagViewModel : IUpdateTag
+    public class EditTagViewModel
     {
         [Required(ErrorMessage = "Укажите Id тега!")]
         public int Id { get; set; }
