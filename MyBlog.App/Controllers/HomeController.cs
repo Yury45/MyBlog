@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyBlog.BLL.Services.Interfaces;
 using MyBlog.BLL.ViewModels;
 using MyBlog.Data.Models.Users;
 using MyBlog.Data.Repositories.Interfaces;
@@ -10,17 +11,17 @@ namespace MyBlog.App.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IRepository<User> _userReposytory;
+        private readonly IDataDefaultService _dataService;
 
-        public HomeController(ILogger<HomeController> logger, IRepository<User> userRepository)
+        public HomeController(ILogger<HomeController> logger, IDataDefaultService dataService)
         {
             _logger = logger;
-            _userReposytory = userRepository;
+            _dataService = dataService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-
+            await _dataService.GenerateDefaultDate();
             return View();
         }
 

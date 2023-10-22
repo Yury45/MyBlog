@@ -1,68 +1,171 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using MyBlog.BLL.Services.Interfaces;
+using MyBlog.BLL.ViewModels.Roles.Response;
 using MyBlog.BLL.ViewModels.Users.Request;
+using MyBlog.Data.Models.Roles;
 using MyBlog.Data.Models.Users;
-
 
 namespace MyBlog.BLL.Services
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<User> _userManager;
-        private readonly IRoleService _roleService;
+        private readonly UserManager<User> _userService;
+        private readonly SignInManager<User> _signInService;
+        private readonly RoleManager<Role> _roleService;
         private readonly IMapper _mapper;
 
-        public UserService(UserManager<User> userManager, IMapper mapper, IRoleService roleService)
+        public UserService(UserManager<User> userManager, IMapper mapper, RoleManager<Role> roleService, SignInManager<User> signInManager)
         {
-            _userManager = userManager;
+            _userService = userManager;
             _mapper = mapper;
             _roleService = roleService;
+            _signInService = signInManager;
         }
 
-        public Task<IdentityResult> CreateUserAsync(CreateUserViewModel model)
+        public async Task<IdentityResult> CreateUserAsync(CreateUserViewModel model)
         {
-            throw new NotImplementedException();
+            var user = new User();
+            if (model.Firstname != null)
+            {
+                user.Firstname = model.Firstname;
+            }
+            if (model.Lastname != null)
+            {
+                user.Lastname = model.Lastname;
+            }
+            if (model.Email != null)
+            {
+                user.Email = model.Email;
+            }
+            if (model.Login != null)
+            {
+                user.UserName = model.Login;
+            }
+            var userRole = new Role() { Name = "Пользователь", Description = "Стандартный набор возможностей" };
+            var result = await _userService.CreateAsync(user, model.Password);
+            await _userService.AddToRoleAsync(user, userRole.Name);
+            return result;
         }
 
-        public Task DeleteUserAsync(Guid id)
+        public async Task DeleteUserAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = await _userService.FindByIdAsync(id.ToString());
+            await _userService.DeleteAsync(user);
         }
 
-        public Task<IdentityResult> EditUserAsync(EditUserViewModel model)
+        public async Task<IdentityResult> EditUserAsync(EditUserViewModel model)
         {
-            throw new NotImplementedException();
+            var user = await _userService.FindByIdAsync(model.Id.ToString());
+            if (model.Firstname != null)
+            {
+                user.Firstname = model.Firstname;
+            }
+            if (model.Lastname != null)
+            {
+                user.Lastname = model.Lastname;
+            }
+            if (model.Email != null)
+            {
+                user.Email = model.Email;
+            }
+            if (model.NewPassword != null)
+            {
+                user.PasswordHash = _userService.PasswordHasher.HashPassword(user, model.NewPassword);
+            }
+            if (model.Login != null)
+            {
+                user.UserName = model.Login;
+            }
+            foreach (var role in model.Roles)
+            {
+                var roleName = _roleService.FindByIdAsync(role.Id.ToString()).Result.Name;
+                if (role.IsSelected)
+                {
+                    await _userService.AddToRoleAsync(user, roleName);
+                }
+                else
+                {
+                    await _userService.RemoveFromRoleAsync(user, roleName);
+                }
+            }
+            var result = await _userService.UpdateAsync(user);
+            return result;
         }
 
-        public Task<EditUserViewModel> EditUserAsync(Guid id)
+        public async Task<EditUserViewModel> EditUserAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = await _userService.FindByIdAsync(id.ToString());
+            var allRolesName = _roleService.Roles.ToList();
+            var model = new EditUserViewModel
+            {
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                Login = user.UserName,
+                Email = user.Email,
+                NewPassword = string.Empty,
+                Id = id,
+                Roles = allRolesName.Select(r => new RoleViewModel() { Id = r.Id, Name = r.Name }).ToList(),
+            };
+            return model;
         }
 
-        public Task<User> GetuserAsync(Guid id)
+        public async Task<User> GetUserAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _userService.FindByIdAsync(id.ToString());
         }
 
-        public Task<List<User>> GetUsersAsync()
+        public async Task<List<User>> GetUsersAsync()
         {
-            throw new NotImplementedException();
+            var users = _userService.Users
+                .Include(u => u.Articles)
+                .ToList();
+            foreach (var user in users)
+            {
+                var roles = await _userService.GetRolesAsync(user);
+                foreach (var role in roles)
+                {
+                    var newRole = new Role { Name = role };
+                    user.Roles.Add(newRole);
+                }
+            }
+            return users;
         }
 
-        public Task<Microsoft.AspNetCore.Identity.SignInResult> LoginUserAsync(LoginUserViewModel model)
+        public async Task<SignInResult> LoginUserAsync(LoginUserViewModel model)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(model.Email);
+            var user = await _userService.FindByEmailAsync(model.Email);
+            if (user == null)
+                return SignInResult.Failed;
+
+            var result = await _signInService.PasswordSignInAsync(user, model.Password, true, false);
+            return result;
         }
 
-        public Task LogoutUserAccount()
+        public async Task LogoutUserAccount()
         {
-            throw new NotImplementedException();
+            await _signInService.SignOutAsync();
         }
 
-        public Task<IdentityResult> RegisterUserAsync(RegisterUserViewModel model)
+        public async Task<IdentityResult> RegisterUserAsync(RegisterUserViewModel model)
         {
-            throw new NotImplementedException();
+            var user = _mapper.Map<User>(model);
+            var result = await _userService.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await _signInService.SignInAsync(user, false);
+                var userRole = new Role() { Name = "Пользователь", Description = "Стандартная роль приложения" };
+                await _roleService.CreateAsync(userRole);
+                var currentUser = await _userService.FindByIdAsync(Convert.ToString(user.Id));
+                await _userService.AddToRoleAsync(currentUser, userRole.Name);
+                return result;
+            }
+            else
+            {
+                return result;
+            }
         }
     }
 }

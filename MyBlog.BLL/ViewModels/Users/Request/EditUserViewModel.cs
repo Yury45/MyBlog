@@ -10,15 +10,15 @@ namespace MyBlog.BLL.ViewModels.Users.Request
     {
         [DataType(DataType.Text)]
         [Display(Name = "Имя", Prompt = "Имя")]
-        public string? FirstName { get; set; }
+        public string? Firstname { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Фамилия", Prompt = "Фамилия")]
-        public string? LastName { get; set; }
+        public string? Lastname { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Никнейм", Prompt = "Никнейм")]
-        public string? UserName { get; set; }
+        [Display(Name = "Логин", Prompt = "Логин")]
+        public string? Login { get; set; }
 
         [EmailAddress]
         [Display(Name = "Почта")]

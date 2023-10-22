@@ -17,15 +17,11 @@ namespace MyBlog.Data.Models.Users
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public string Login {  get; set; }
-        public DateTime BirthDate { get; set; }
-        public string Email {  get; set; }
-        public string Password { get; set; }
         public string Photo {  get; set; }
 
-        public List<Article> Articles { get; set; }
-        public List<Comment> Comments { get; set; }
-        public List<Role> Roles { get; set; }
+        public List<Article> Articles { get; set; } = new();
+        public List<Comment> Comments { get; set; } = new();
+        public List<Role> Roles { get; set; } = new();
 
         public User()
         {

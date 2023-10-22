@@ -31,6 +31,8 @@ namespace MyBlog.App
                 .AddCustomRepository<Comment, CommentRepository>()
                 .AddCustomRepository<Role, RoleRepository>()
                 .AddCustomRepository<User, UserRepository>()
+                .AddServicesBL()
+                .AddAutoMapper()
                 .AddIdentity<User, Role>(opts =>
                 {
                     opts.Password.RequiredLength = 5;
@@ -46,7 +48,6 @@ namespace MyBlog.App
             services.AddSingleton<IRepository<Tag>, TagRepository>();
             services.AddSingleton<IRepository<User>, UserRepository>();
 
-            // Add services to the container.
             services.AddControllersWithViews();
 
         }

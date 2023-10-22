@@ -6,14 +6,14 @@ namespace MyBlog.BLL.Services.Interfaces
 {
     public interface ICommentService
     {
-        Task<Guid> CreateComment(CreateCommentViewModel model, int userId);
+        Task<int> CreateCommentAsync(CreateCommentViewModel model, int userId);
 
-        Task RemoveComment(int id);
+        Task DeleteCommentAsync(int id);
 
-        Task<List<Comment>> GetComments();
+        Task<List<Comment>> GetCommentsAsync();
 
-        Task<EditCommentViewModel> EditComment(int id);
+        Task<EditCommentViewModel> EditCommentAsync(int id);
 
-        Task EditComment(EditCommentViewModel model, int id);
+        Task EditCommentAsync(EditCommentViewModel model, int id);
     }
 }

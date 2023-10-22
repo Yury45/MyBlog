@@ -17,13 +17,13 @@ namespace MyBlog.BLL.Services.Interfaces
 
         Task<IdentityResult> EditUserAsync(EditUserViewModel model);
 
-        Task<EditUserViewModel> EditUserAsync(Guid id);
+        Task<EditUserViewModel> EditUserAsync(int id);
 
-        Task DeleteUserAsync(Guid id);
+        Task DeleteUserAsync(int id);
 
         Task<List<User>> GetUsersAsync();
 
-        Task<User> GetuserAsync(Guid id);
+        Task<User> GetUserAsync(int id);
 
         Task LogoutUserAccount();
     }

@@ -1,0 +1,22 @@
+﻿@model MyBlog.Data.Models.Users.User
+@{
+	ViewData["Title"] = "User's information";
+}
+@{
+    <h5 class="card-title">Данные пользователя: @Model.Email</h5>
+    <div class="card w-75">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Firstname</h5>
+            <h5 class="card-title">@Model.Lastname</h5>
+            <h5 class="card-title">Список ролей:</h5>
+            <hr/>
+            <h5>Роли:</h5>
+                @foreach (var role in Model.Roles)
+                {
+                    <span class="badge rounded-pill text-bg-success" style="color:green">@role.Name</span>
+                }
+            <h5>Посты:</h5>
+        </div>
+    </div>
+    <p></p>
+}

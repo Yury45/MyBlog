@@ -20,6 +20,7 @@ namespace MyBlog.Data
 
         public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options) 
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -29,14 +30,15 @@ namespace MyBlog.Data
             builder.Ignore<IdentityUserToken<int>>();
             builder.Ignore<IdentityUserLogin<int>>();
 
-
             builder.Entity<Article>().ToTable("articles");
-            builder.Entity<Comment>().ToTable("comments");
             builder.Entity<Role>().ToTable("roles").HasKey(x => x.Id);
             builder.Entity<Tag>().ToTable("tags");
-            builder.Entity<User>().ToTable("users").HasKey(x => x.Id);
+            builder.Entity<User>().ToTable("users");
 
-            builder.Entity<Comment>()
+
+
+			builder.Entity<Comment>()
+            .ToTable("comments")
             .HasOne(a => a.User)
             .WithMany(b => b.Comments)
             .HasForeignKey(c => c.UserId)

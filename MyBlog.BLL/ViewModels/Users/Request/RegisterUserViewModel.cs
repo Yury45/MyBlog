@@ -7,32 +7,27 @@ namespace MyBlog.BLL.ViewModels.Users.Request
     /// </summary>
     public class RegisterUserViewModel
     {
-        [Required(ErrorMessage = "Поле Имя обязательно для заполнения")]
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
         [DataType(DataType.Text)]
         [Display(Name = "Имя", Prompt = "Введите имя")]
-        public string? Login { get; set; }
+        public string? Firstname { get; set; }
 
-        [Required(ErrorMessage = "Поле Имя обязательно для заполнения")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Имя", Prompt = "Введите имя")]
-        public string? FirstName { get; set; }
-
-        [Required(ErrorMessage = "Поле Фамилия обязательно для заполнения")]
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
         [DataType(DataType.Text)]
         [Display(Name = "Фамилия", Prompt = "Введите фамилию")]
-        public string? LastName { get; set; }
+        public string? Lastname { get; set; }
 
-        [Required(ErrorMessage = "Поле Никнейм обязательно для заполнения")]
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
         [DataType(DataType.Text)]
-        [Display(Name = "Никнейм", Prompt = "Введите никнейм")]
-        public string? UserName { get; set; }
+        [Display(Name = "Логин", Prompt = "Введите логин")]
+        public string? Login { get; set; }
 
-        [Required(ErrorMessage = "Поле Email обязательно для заполнения")]
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
         [EmailAddress]
-        [Display(Name = "Email", Prompt = "example@mail.com")]
+        [Display(Name = "Email", Prompt = "example@gmail.com")]
         public string? Email { get; set; }
 
-        [Required(ErrorMessage = "Поле Пароль обязательно для заполнения")]
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль", Prompt = "Введите пароль")]
         [StringLength(50, ErrorMessage = "Поле {0} должно иметь минимум {2} и максимум {1} символов.", MinimumLength = 5)]

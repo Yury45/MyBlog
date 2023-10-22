@@ -13,9 +13,9 @@ namespace MyBlog.Data.Models.Roles
     /// </summary>
     public class Role : IdentityRole<int>
     {
-        public string Description {  get; set; }
+        public string? Description {  get; set; }
 
-        public List<User> Users { get; set; }
+        public List<User> Users { get; set; } = new();
 
     }
 }

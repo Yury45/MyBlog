@@ -1,0 +1,32 @@
+﻿@model List<MyBlog.Data.Models.Users.User>
+@{
+	ViewData["Title"] = "List of users";
+}
+@{
+    @if (Model.Count() == 0)
+    {
+	    <h5 class="card-title">Нет данных для отображения</h5>
+    }
+    else
+    {
+	    if (User.IsInRole("Администратор"))
+	    {
+	    }
+        <h5 class="card-title">Все пользователи</h5>
+        foreach (var user in Model)
+        {
+            <div class="card w-75">
+                <div class="card-body">
+                    <h5 class="card-title">@user.Firstname</h5>
+                    <h5>Роли:</h5>
+                        @foreach (var role in user.Roles)
+                        {
+                            <span class="badge rounded-pill text-bg-success" style="color:green">@role.Name</span>
+                        }
+                    <h5>Посты:</h5>
+                </div>
+            </div>
+            <p></p>
+        }
+    }
+}

@@ -16,6 +16,7 @@ namespace MyBlog.Data.Models.Comments
         public int Id { get; set; }
         public string Text { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string Author { get; set; }
 
         public Article Article { get; set; }
         public int ArticleId {  get; set; }

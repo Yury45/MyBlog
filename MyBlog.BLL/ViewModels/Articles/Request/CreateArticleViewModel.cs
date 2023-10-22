@@ -15,7 +15,7 @@ namespace MyBlog.BLL.ViewModels.Articles.Request
     public class CreateArticleViewModel
     {
         public int Id { get; set; }
-        public string? AuthorId { get; set; }
+        public int AuthorId { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Теги", Prompt = "Теги")]

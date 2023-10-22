@@ -8,7 +8,7 @@ namespace MyBlog.BLL.Services.Interfaces
         /// <summary>
         /// Метода создания тега
         /// </summary>
-        Task<Guid> CreateTag(CreateTagViewModel model);
+        Task<int> CreateTagAsync(CreateTagViewModel model);
 
         /// <summary>
         /// Метод получения списка всех тегов
@@ -33,7 +33,7 @@ namespace MyBlog.BLL.Services.Interfaces
         /// <summary>
         /// Метод удаления тега
         /// </summary>
-        Task DeleteTagAsync(int id);
+        Task DeleteTagAsync(Tag tag);
 
     }
 }

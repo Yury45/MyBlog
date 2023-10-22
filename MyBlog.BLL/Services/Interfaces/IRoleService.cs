@@ -12,14 +12,14 @@ namespace MyBlog.BLL.Services.Interfaces
 {
     public interface IRoleService
     {
-        Task<Guid> CreateRole(CreateRoleViewModel model);
+        Task<int> CreateRoleAsync(CreateRoleViewModel model);
 
-        Task EditRole(CreateRoleViewModel model);
+        Task EditRoleAsync(EditRoleViewModel model);
 
-        Task RemoveRole(int id);
+        Task DeleteRoleAsync(int id);
 
-        Task<List<Role>> GetRoles();
+        Task<List<Role>> GetRolesAsync();
 
-        Task<Role?> GetRole(int id);
+        Task<Role?> GetRoleAsync(int id);
     }
 }

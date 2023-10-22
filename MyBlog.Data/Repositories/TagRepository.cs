@@ -25,7 +25,7 @@ namespace MyBlog.Data.Repositories
             return await Set.Include(x => x.Articles).Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<List<Tag>> GetByArticleId(int articleId)
+        public async Task<List<Tag>> GetByArticleIdAsync(int articleId)
         {
             return await Set.Include(x => x.Articles)
             .SelectMany(x => x.Articles, (x, a) => new { Tag = x, ArticleId = a.Id })
