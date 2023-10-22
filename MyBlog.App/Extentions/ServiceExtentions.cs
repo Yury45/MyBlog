@@ -3,6 +3,10 @@ using MyBlog.Data.Repositories;
 using MyBlog.BLL.Services.Interfaces;
 using MyBlog.BLL.Services;
 using AutoMapper;
+using MyBlog.Data.Models.Articles;
+using MyBlog.Data.Models.Comments;
+using MyBlog.Data.Models.Tags;
+using MyBlog.Data.Models.Users;
 
 namespace MyBlog.App.Extentions
 {
@@ -29,7 +33,7 @@ namespace MyBlog.App.Extentions
         }
         #endregion
 
-        #region Реализация IoC
+        #region Реализация IoC для сервисов
         public static IServiceCollection AddServicesBL(this IServiceCollection services)
         {
             services.AddScoped<IArticleService, ArticleService>();
@@ -41,7 +45,20 @@ namespace MyBlog.App.Extentions
 
             return services;
         }
-        #endregion
+		#endregion
+
+		#region Реализация IoC для репозиториев
+		public static IServiceCollection AddRepositories(this IServiceCollection services)
+		{
+			services.AddSingleton<IRepository<Article>, ArticleRepository>();
+			services.AddSingleton<IRepository<Comment>, CommentRepository>();
+			services.AddSingleton<IRepository<Tag>, TagRepository>();
+			services.AddSingleton<IRepository<User>, UserRepository>();
+
+			return services;
+		}
+		#endregion
+
 
         #region Конфигурация automapper'a
         public static IServiceCollection AddAutoMapper(this IServiceCollection services)

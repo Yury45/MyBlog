@@ -27,11 +27,8 @@ namespace MyBlog.App
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(connectionString), ServiceLifetime.Singleton)
                 .AddUnitOfWork()
-                .AddCustomRepository<Article, ArticleRepository>()
-                .AddCustomRepository<Comment, CommentRepository>()
-                .AddCustomRepository<Role, RoleRepository>()
-                .AddCustomRepository<User, UserRepository>()
-                .AddServicesBL()
+				.AddRepositories()
+				.AddServicesBL()
                 .AddAutoMapper()
                 .AddIdentity<User, Role>(opts =>
                 {
@@ -42,11 +39,6 @@ namespace MyBlog.App
                     opts.Password.RequireDigit = false;
                 })
                 .AddEntityFrameworkStores<BlogDbContext>();
-
-            services.AddSingleton<IRepository<Article>, ArticleRepository>();
-            services.AddSingleton<IRepository<Comment>, CommentRepository>();
-            services.AddSingleton<IRepository<Tag>, TagRepository>();
-            services.AddSingleton<IRepository<User>, UserRepository>();
 
             services.AddControllersWithViews();
 
